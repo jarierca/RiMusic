@@ -181,5 +181,15 @@ data class Context(
             )
         )
 
+        val ANDROID = Context(
+            Client(
+                clientName = "ANDROID",
+                clientVersion = "19.09.37",
+                userAgent = "com.google.android.youtube/19.09.37 (Linux; U; Android 11) gzip",
+                xClientName = 3, // ANDROID = 3
+                useSignatureTimestamp = true
+            )
+        )
+
     }
 }
