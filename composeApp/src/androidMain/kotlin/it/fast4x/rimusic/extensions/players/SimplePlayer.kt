@@ -11,6 +11,7 @@ import it.fast4x.environment.EnvironmentExt
 import it.fast4x.environment.models.Context
 import it.fast4x.environment.models.Context.Companion.DefaultWeb3
 import it.fast4x.environment.models.Context.Companion.TVHTML5_SIMPLY_EMBEDDED_PLAYER
+import it.fast4x.environment.models.Context.Companion.ANDROID
 import it.fast4x.environment.models.PlayerResponse
 import it.fast4x.environment.utils.NewPipeUtils
 import it.fast4x.rimusic.enums.AudioQualityFormat
@@ -45,6 +46,7 @@ object SimplePlayer {
      * Clients used for fallback streams in case the streams of the main client do not work.
      */
     private val STREAM_FALLBACK_CLIENTS: Array<Context.Client> = arrayOf(
+        ANDROID.client,
         TVHTML5_SIMPLY_EMBEDDED_PLAYER.client,
         DefaultWeb3.client,
     )
@@ -314,6 +316,9 @@ object SimplePlayer {
                 if (client.useWebPoTokens && webStreamingPot != null) {
                     streamUrl += "&pot=$webStreamingPot";
                 }
+
+                Timber.d("StreamTest: Stream-client-used=${STREAM_FALLBACK_CLIENTS[clientIndex]}")
+                Timber.d("StreamTest: Trying client=${clientIndex}, url=$streamUrl")
 
                 if (clientIndex == STREAM_FALLBACK_CLIENTS.size - 1) {
                     /** skip [validateStatus] for last client */
