@@ -1,8 +1,6 @@
-#-dontshrink
--dontobfuscate
-#-dontoptimize
-#-repackageclasses 'defpackage'
-
+#---------------------------------------
+# Kotlin & Serialization
+#---------------------------------------
 -keep,allowobfuscation,allowshrinking class kotlin.coroutines.Continuation
 
 -if @kotlinx.serialization.Serializable class **
@@ -89,6 +87,13 @@
 ## Rules for NewPipeExtractor
 -keep class org.schabi.newpipe.extractor.timeago.patterns.** { *; }
 -keep class org.mozilla.javascript.** { *; }
--keep class org.mozilla.classfile.ClassFileWriter
+-dontwarn org.mozilla.classfile.ClassFileWriter
 -dontwarn org.mozilla.javascript.JavaToJSONConverters
 -dontwarn org.mozilla.javascript.tools.**
+
+#---------------------------------------
+# javax.script / jdk.dynalink (Rhino dependencies)
+#---------------------------------------
+-dontwarn javax.script.**
+-dontwarn jdk.dynalink.**
+-dontwarn jdk.dynalink.support.**
